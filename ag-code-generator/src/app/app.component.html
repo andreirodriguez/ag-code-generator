@@ -1,4 +1,28 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a>
+<div nz-row style="margin-left: 50px;margin-right: 50px;margin-top: 50px;">
+  <div nz-col nzSpan="24">
+
+    Tabla:
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected">
+      <nz-option nzLabel="Jack" nzValue="Table 1"></nz-option>
+    </nz-select>
+
+    <button nz-button nzType="primary" (click)="openConectionModal()">Conexión</button>
+
+  </div>
+  <div nz-col nzSpan="24">
+    <nz-table #basicTable [nzData]="[]">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+
