@@ -1,13 +1,55 @@
 <form nz-form [formGroup]="validateForm">
+
     <nz-form-item>
-      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>DatePicker</nz-form-label>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Programación</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select formControlName="ddlLanguageProgramming" nzPlaceHolder="Seleccione el lenguage de programación"  >
+                <nz-option nzLabel="Net Core" nzValue="NetCore"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>  
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Motor de datos</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select formControlName="ddlEngineDb" nzPlaceHolder="Seleccione el motor de base de datos"  >
+                <nz-option nzLabel="Sql Server" nzValue="SqlServer"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>  
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Servidor</nz-form-label>
       <nz-form-control [nzSm]="16" [nzXs]="24">
-        <input nz-input formControlName="email" id="email" />
+        <input nz-input formControlName="txtServerDb" placeholder="Ingrese su servidor de base de datos" />
       </nz-form-control>
     </nz-form-item>
-  </form>
 
-<div *nzModalFooter>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Base de datos</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input formControlName="txtDataBaseDb" placeholder="Ingrese el nombre la base de datos" />
+        </nz-form-control>
+    </nz-form-item>    
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Usuario</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input formControlName="txtUserNameDb" placeholder="Ingrese el usuario de base de datos" />
+        </nz-form-control>
+    </nz-form-item>        
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Password</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input formControlName="txtPasswordDb" placeholder="Ingrese el password de base de datos" />
+        </nz-form-control>
+    </nz-form-item>      
+
+</form>
+
+<div *nzModalFooter>    
     <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
-    <button nz-button nzType="primary" (click)="handleOk()">Aceptar</button>
+    <button nz-button nzType="primary" (click)="handleOk()">Conectar</button>    
 </div>
