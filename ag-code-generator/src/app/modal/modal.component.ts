@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CodeGeneratorService } from '../services/code-generator/code-generator.service';
-
 
 @Component({
     selector: 'app-modal',

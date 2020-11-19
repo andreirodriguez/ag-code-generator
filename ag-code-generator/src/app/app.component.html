@@ -2,7 +2,7 @@
   <div nz-col nzSpan="24">
 
     Tabla:
-    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected">
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected" >
       <nz-option nzLabel="Jack" nzValue="Table 1"></nz-option>
     </nz-select>
 
@@ -13,10 +13,14 @@
     <nz-table #basicTable [nzData]="[]">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Address</th>
-          <th>Action</th>
+          <th>Id</th>
+          <th>Campo BD</th>
+          <th>Tipo Dato BD</th>
+          <th>Longitud Dato BD</th>
+          <th>Precision Dato BD</th>
+          <th>Es Null BD</th>
+          <th>Campo Entidad</th>
+          <th>Tipo Dato Entidad</th>
         </tr>
       </thead>
       <tbody>

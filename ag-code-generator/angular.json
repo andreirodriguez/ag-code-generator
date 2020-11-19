@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "ag-code-generator"
+  "defaultProject": "ag-code-generator",
+  "cli": {
+    "analytics": "63c5a7fe-a08b-484b-824e-232d52875cc2"
+  }
 }

@@ -7,22 +7,26 @@ import { ModalComponent } from './modal/modal.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+  
+export class AppComponent implements OnInit
+{
+  title = "Generador de Código";
   tableSelected = null;
 
-  constructor(
-    private modalService: NzModalService
-  ){
+  constructor(private modalService: NzModalService)
+  {
     
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     
   }
 
-  openConectionModal(){
+  openConectionModal()
+  {
     const modal = this.modalService.create({
-      nzTitle: "Conexión",
+      nzTitle: "Conexión de base de datos",
       nzContent: ModalComponent
     });
 

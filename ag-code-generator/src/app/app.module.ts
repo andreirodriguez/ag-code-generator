@@ -14,6 +14,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
+
 import { ModalComponent } from './modal/modal.component';
 
 registerLocaleData(en);
@@ -35,6 +37,7 @@ registerLocaleData(en);
     NzSelectModule,
     NzGridModule,
     NzModalModule,
+    NzInputModule,
     ReactiveFormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
