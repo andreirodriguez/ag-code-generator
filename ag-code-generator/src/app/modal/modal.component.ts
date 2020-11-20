@@ -54,11 +54,11 @@ import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 
       localStorage.setItem( "ddlLanguageProgramming" , this.validateForm.value.ddlLanguageProgramming );
       let data = {
-        dbType: this.validateForm.value.ddlEngineDb ,
-        server: this.validateForm.value.txtServerDb,
-        dataBase: this.validateForm.value.txtDataBaseDb ,
-        userName: this.validateForm.value.txtUserNameDb ,
-        password: this.validateForm.value.txtPasswordDb
+        "dbType": this.validateForm.value.ddlEngineDb ,
+        "server": this.validateForm.value.txtServerDb,
+        "dataBase": this.validateForm.value.txtDataBaseDb ,
+        "userName": this.validateForm.value.txtUserNameDb ,
+        "password": this.validateForm.value.txtPasswordDb
       }
 
       this.codeGeneratorService.postConnection(data).subscribe(
@@ -68,7 +68,5 @@ import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
         (erro: any) => {
 
         } );
-
-      // this.modalRef.destroy( { table: [{name:"exam" , id: 1}] }  )
     }
   }
