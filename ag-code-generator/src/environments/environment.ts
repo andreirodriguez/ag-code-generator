@@ -8,7 +8,9 @@ export const environment = {
     codeGenerator: "http://localhost:8089"
   },
   codeGenerator: {
-    tableSearch: "/tables/search"
+    tableSearch: "/tables/search",
+    columnSearch: "/columns/search",
+    generator: "/generator",
   }
 };
 

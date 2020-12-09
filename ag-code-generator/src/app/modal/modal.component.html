@@ -1,55 +1,56 @@
-<form nz-form [formGroup]="validateForm">
+<nz-modal nzTitle="Conexión a base de datos" [nzFooter]="nzModalFooter" [(nzVisible)]="isVisible" (nzOnCancel)="btnCancel()">
+    <form nz-form [formGroup]="connectionForm">
 
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="ddlLanguageProgramming" [nzSm]="8" [nzXs]="24" nzRequired>Programación</nz-form-label>
-        <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-            <nz-select formControlName="ddlLanguageProgramming" nzPlaceHolder="Seleccione el lenguage de programación"  >
-                <nz-option nzLabel="Net Core" nzValue="NetCore"></nz-option>
-            </nz-select>
-        </nz-form-control>
-    </nz-form-item>  
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="ddlLanguageProgramming" nzRequired>Programación</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <nz-select formControlName="ddlLanguageProgramming" nzPlaceHolder="Seleccione el lenguage de programación">
+                    <nz-option nzLabel="Net Core" nzValue="NetCore"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="ddlEngineDb" [nzSm]="8" [nzXs]="24" nzRequired>Motor de datos</nz-form-label>
-        <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-            <nz-select formControlName="ddlEngineDb" nzPlaceHolder="Seleccione el motor de base de datos"  >
-                <nz-option nzLabel="Sql Server" nzValue="SqlServer"></nz-option>
-            </nz-select>
-        </nz-form-control>
-    </nz-form-item>  
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="ddlEngineDb" nzRequired>Motor de datos</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <nz-select formControlName="ddlEngineDb" nzPlaceHolder="Seleccione el motor de base de datos">
+                    <nz-option nzLabel="Sql Server" nzValue="SqlServer"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
 
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="txtServerDb" nzRequired>Servidor</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <input nz-input formControlName="txtServerDb" placeholder="Ingrese su servidor de base de datos" />
+            </nz-form-control>
+        </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label nzRequired nzFor="txtServerDb" [nzSm]="8" [nzXs]="24" nzRequired>Servidor</nz-form-label>
-      <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-        <input nz-input formControlName="txtServerDb" placeholder="Ingrese su servidor de base de datos" />
-      </nz-form-control>
-    </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="txtDataBaseDb" nzRequired>Base de datos</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <input nz-input formControlName="txtDataBaseDb" placeholder="Ingrese el nombre la base de datos" />
+            </nz-form-control>
+        </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="txtDataBaseDb" [nzSm]="8" [nzXs]="24" nzRequired>Base de datos</nz-form-label>
-        <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-          <input nz-input formControlName="txtDataBaseDb" placeholder="Ingrese el nombre la base de datos" />
-        </nz-form-control>
-    </nz-form-item>    
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="txtUserNameDb" nzRequired>Usuario</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <input nz-input formControlName="txtUserNameDb" placeholder="Ingrese el usuario de base de datos" />
+            </nz-form-control>
+        </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="txtUserNameDb" [nzSm]="8" [nzXs]="24" nzRequired>Usuario</nz-form-label>
-        <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-          <input nz-input formControlName="txtUserNameDb" placeholder="Ingrese el usuario de base de datos" />
-        </nz-form-control>
-    </nz-form-item>        
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired nzFor="txtPasswordDb" nzRequired>Password</nz-form-label>
+            <nz-form-control [nzSpan]="18" nzErrorTip="Campo obligatorio.">
+                <input nz-input formControlName="txtPasswordDb" placeholder="Ingrese el password de base de datos" />
+            </nz-form-control>
+        </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="txtPasswordDb" [nzSm]="8" [nzXs]="24" nzRequired>Password</nz-form-label>
-        <nz-form-control nzErrorTip="Campo obligatorio." [nzSm]="16" [nzXs]="24">
-          <input nz-input formControlName="txtPasswordDb" placeholder="Ingrese el password de base de datos" />
-        </nz-form-control>
-    </nz-form-item>      
+    </form>
 
-</form>
-
-<div *nzModalFooter>    
-    <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
-    <button nz-button nzType="primary" (click)="handleOk()">Conectar</button>    
-</div>
+    <ng-template #nzModalFooter>
+        <button nz-button nzType="default" (click)="btnCancel()">Cancelar</button>
+        <button nz-button nzType="primary" (click)="btnOk()">Conectar</button>
+    </ng-template>
+</nz-modal>

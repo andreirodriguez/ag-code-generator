@@ -1,31 +1,73 @@
-<div nz-row style="margin-left: 50px;margin-right: 50px;margin-top: 50px;">
-  <div nz-col nzSpan="24">
-
-    Tabla:
-    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected" style="width: 150px;" >
-      <nz-option *ngFor="let item of tableList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-    </nz-select>
-
-    <button nz-button nzType="primary" (click)="openConectionModal()" (emiteConection)="onEmitterConection($event)"  >Conexión</button>
-
-  </div>
-  <div nz-col nzSpan="24">
-    <nz-table #basicTable [nzData]="[]">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Campo Entidad</th>
-          <th>Tipo Dato Entidad</th>          
-          <th>Campo BD</th>
-          <th>Tipo Dato BD</th>
-          <th>Longitud Dato BD</th>
-          <th>Precision Dato BD</th>
-          <th>Es Null BD</th>
-        </tr>
-      <tbody>
-      </tbody>
-    </nz-table>
-  </div>
-</div>
-
-
+<form nz-form [formGroup]="searchFormGroup">
+    <nz-card nzTitle="Generador de código">
+        <div nz-row>
+            <div nz-col [nzSm]="5" [nzXs]="24">
+                <nz-form-item style="margin-right: 5PX;">
+                    <nz-form-label nzFor="table">Tabla</nz-form-label>
+                    <nz-form-control>
+                        <nz-select formControlName="tablename" nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected" (ngModelChange)="searchColumns($event)">
+                            <nz-option *ngFor="let item of tableList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSm]="17" [nzXs]="24">
+                <nz-form-control>
+                    <button nz-button nzType="primary" (click)="generate()">Generar</button>
+                </nz-form-control>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col [nzSm]="5" [nzXs]="24">
+                <nz-form-item style="margin-right: 5PX;">
+                    <nz-form-label nzFor="table">Entidad</nz-form-label>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="entity" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSm]="17" [nzXs]="24">
+                <nz-form-control>
+                    <button nz-button nzType="primary" (click)="openModal()">Conexión</button>
+                </nz-form-control>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-table [nzData]="columns" nzShowPagination="false">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Campo Entidad</th>
+                            <th>Tipo Dato Entidad</th>
+                            <th>Campo BD</th>
+                            <th>Tipo Dato BD</th>
+                            <th>Longitud BD</th>
+                            <th>Longitud Dato BD</th>
+                            <th>Precision Dato BD</th>
+                            <th>Es Null BD</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let column of columns">
+                                <td>{{column.id}}</td>
+                                <td>
+                                    <input type="text" nz-input [(ngModel)]="column.name" [ngModelOptions]="{standalone: true}" />
+                                </td>
+                                <td>
+                                    <input type="text" nz-input [(ngModel)]="column.dataType" [ngModelOptions]="{standalone: true}" />
+                                </td>
+                                <td>{{column.nameEntity}}</td>
+                                <td>{{column.dataTypeEntity}}</td>
+                                <td>{{column.length}}</td>
+                                <td>{{column.dataTypeLength}}</td>
+                                <td>{{column.precision}}</td>
+                                <td [nzChecked]="column.isNull" (nzCheckedChange)="setColumnValue(column.id, $event)" nzDisabled="true">
+                                </td>
+                            </tr>
+                        </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </nz-card>
+</form>
+<app-modal [isVisible]="isVisible" (valuesEmit)="emiteConection($event)"></app-modal>

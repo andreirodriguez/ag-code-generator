@@ -1,72 +1,73 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CodeGeneratorService } from '../services/code-generator/code-generator.service';
-import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 
 @Component({
-    selector: 'app-modal',
-    templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.scss']
-  })
-  export class ModalComponent implements OnInit {
-    validateForm!: FormGroup;
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss']
+})
+export class ModalComponent implements OnInit {
+  connectionForm!: FormGroup;
 
-    emiteConection: EventEmitter<any> = new EventEmitter();
+  @Output() valuesEmit: EventEmitter<any> = new EventEmitter();
+  @Input() isVisible: boolean;
 
-    constructor(
-      private codeGeneratorService: CodeGeneratorService,
-      private fb: FormBuilder,
-      private modalRef: NzModalRef,
-      ){
-        this.validateForm = this.fb.group({
-          ddlLanguageProgramming: [null , Validators.required],
-          ddlEngineDb: [null , Validators.required],
-          txtServerDb: [null , Validators.required],
-          txtDataBaseDb: [null , Validators.required],
-          txtUserNameDb: [null , Validators.required],
-          txtPasswordDb: [null , Validators.required]
-        });
-    }
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
 
-    ngOnInit(): void {
-      
-    }
-
-    handleCancel(){
-      console.log( this.validateForm.value );
-      this.emiteConection.emit({
-        name:"eeeeeee"
-      });
-    }
-
-    handleOk(){
-      let error = false;
-      for (const i in this.validateForm.controls) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
-        var status = this.validateForm.controls[i].status;
-        if (status === 'INVALID') {
-          error = true;
-        }
-      }
-
-      if( error ) return;
-
-      localStorage.setItem( "ddlLanguageProgramming" , this.validateForm.value.ddlLanguageProgramming );
-      let data = {
-        "dbType": this.validateForm.value.ddlEngineDb ,
-        "server": this.validateForm.value.txtServerDb,
-        "dataBase": this.validateForm.value.txtDataBaseDb ,
-        "userName": this.validateForm.value.txtUserNameDb ,
-        "password": this.validateForm.value.txtPasswordDb
-      }
-
-      this.codeGeneratorService.postConnection(data).subscribe(
-        (response: any) => {
-          this.modalRef.destroy( { table: response }  )
-        },
-        (erro: any) => {
-
-        } );
-    }
+  ngOnInit(): void {
+    this.loadForm();
   }
+
+  loadForm() {
+    this.connectionForm = this.formBuilder.group({
+      ddlLanguageProgramming: [null, Validators.required],
+      ddlEngineDb: [null, Validators.required],
+      txtServerDb: [null, Validators.required],
+      txtDataBaseDb: [null, Validators.required],
+      txtUserNameDb: [null, Validators.required],
+      txtPasswordDb: [null, Validators.required]
+    });
+  }
+
+  btnCancel() {
+    this.valuesEmit.emit({
+      data: null
+    });
+  }
+
+  btnOk() {
+
+    if (!this.validForm())
+      return;
+
+    // localStorage.setItem("ddlLanguageProgramming", this.connectionForm.value.ddlLanguageProgramming);
+    let data = {
+      "dbType": this.connectionForm.value.ddlEngineDb,
+      "server": this.connectionForm.value.txtServerDb,
+      "dataBase": this.connectionForm.value.txtDataBaseDb,
+      "userName": this.connectionForm.value.txtUserNameDb,
+      "password": this.connectionForm.value.txtPasswordDb,
+      "languageProgramming" : this.connectionForm.value.ddlLanguageProgramming
+    }
+
+    this.valuesEmit.emit({
+      data: data
+    });
+  }
+
+  validForm() {
+    let errors = [];
+    for (const i in this.connectionForm.controls) {
+      this.connectionForm.controls[i].markAsDirty();
+      this.connectionForm.controls[i].updateValueAndValidity();
+      let status = this.connectionForm.controls[i].status;
+      if (status === 'INVALID') {
+        errors.push(status);
+      }
+    }
+    return errors.length === 0 ? true : false;
+  }
+
+}
