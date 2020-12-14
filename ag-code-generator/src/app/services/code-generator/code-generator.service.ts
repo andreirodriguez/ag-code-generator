@@ -16,9 +16,9 @@ export class CodeGeneratorService {
     return this.httpService.post<Array<Table>>(`${url}`, request);
   }
 
-  getSearchColumns(request: any): Observable<Array<Column>> {
+  postSearchColumns(request: any): Observable<Array<Column>> {
     let url = environment.api.codeGenerator + environment.codeGenerator.columnSearch;
-    return this.httpService.get<Array<Column>>(`${url}`);
+    return this.httpService.post<Array<Column>>(`${url}`, request);
   }
 
   postGenerator(request: any): Observable<any> {

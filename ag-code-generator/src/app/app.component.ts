@@ -48,20 +48,18 @@ export class AppComponent implements OnInit {
   }
 
   emiteConection(event) {
-    console.log(event);
-
     this.tempData = event.data;
     this.isVisible = false;
 
     var request = {
-      dbType: event.data,
-      server: event.server,
-      dataBase: event.dataBase,
-      userName: event.userName,
-      password: event.password,
+      dbType: this.tempData.dbType,
+      server: this.tempData.server,
+      dataBase: this.tempData.dataBase,
+      userName: this.tempData.userName,
+      password: this.tempData.password,
     }
 
-    this.codeGeneratorService.getSearchColumns(request).subscribe(response => {
+    this.codeGeneratorService.postConnection(request).subscribe(response => {
       this.tableList = response;
     });
   }
@@ -84,7 +82,7 @@ export class AppComponent implements OnInit {
       "programmingLanguage": this.tempData.languageProgramming
     };
 
-    this.codeGeneratorService.getSearchColumns(request).subscribe(response => {
+    this.codeGeneratorService.postSearchColumns(request).subscribe(response => {
       this.columns = response;
     });
   }
