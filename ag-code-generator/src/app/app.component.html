@@ -13,22 +13,31 @@
             </div>
             <div nz-col [nzSm]="17" [nzXs]="24">
                 <nz-form-control>
-                    <button nz-button nzType="primary" (click)="generate()">Generar</button>
+                    <button nz-button nzType="primary" (click)="openModal()">Conexión</button>
                 </nz-form-control>
             </div>
         </div>
         <div nz-row>
             <div nz-col [nzSm]="5" [nzXs]="24">
-                <nz-form-item style="margin-right: 5PX;">
+                <nz-form-item>
                     <nz-form-label nzFor="table">Entidad</nz-form-label>
                     <nz-form-control>
                         <input type="text" nz-input formControlName="entity" />
                     </nz-form-control>
                 </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzFor="table">Proyecto</nz-form-label>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="project" />
+                    </nz-form-control>
+                </nz-form-item>
             </div>
-            <div nz-col [nzSm]="17" [nzXs]="24">
+            
+        </div>
+        <div nz-row>
+            <div nz-col>
                 <nz-form-control>
-                    <button nz-button nzType="primary" (click)="openModal()">Conexión</button>
+                    <button nz-button nzType="primary" (click)="generate()">Generar</button>
                 </nz-form-control>
             </div>
         </div>
@@ -42,9 +51,6 @@
                             <th>Tipo Dato Entidad</th>
                             <th>Campo BD</th>
                             <th>Tipo Dato BD</th>
-                            <th>Longitud BD</th>
-                            <th>Longitud Dato BD</th>
-                            <th>Precision Dato BD</th>
                             <th>Es Null BD</th>
                         </tr>
                         <tbody>
@@ -54,13 +60,10 @@
                                     <input type="text" nz-input [(ngModel)]="column.name" [ngModelOptions]="{standalone: true}" />
                                 </td>
                                 <td>
-                                    <input type="text" nz-input [(ngModel)]="column.dataType" [ngModelOptions]="{standalone: true}" />
+                                    <input type="text" nz-input [(ngModel)]="column.dataTypeDb" [ngModelOptions]="{standalone: true}" />
                                 </td>
-                                <td>{{column.nameEntity}}</td>
-                                <td>{{column.dataTypeEntity}}</td>
-                                <td>{{column.length}}</td>
+                                <td>{{column.nameDb}}</td>
                                 <td>{{column.dataTypeLength}}</td>
-                                <td>{{column.precision}}</td>
                                 <td [nzChecked]="column.isNull" (nzCheckedChange)="setColumnValue(column.id, $event)" nzDisabled="true">
                                 </td>
                             </tr>

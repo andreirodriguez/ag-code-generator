@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd';
-import { ModalComponent } from './modal/modal.component';
 import { CodeGeneratorService } from './services/code-generator/code-generator.service';
 
 @Component({
@@ -39,7 +38,8 @@ export class AppComponent implements OnInit {
   loadForm() {
     this.searchFormGroup = this.formBuilder.group({
       tablename: [null],
-      entity: [null]
+      entity: [null],
+      project: [null]
     });
   }
 
@@ -65,7 +65,6 @@ export class AppComponent implements OnInit {
   }
 
   searchColumns(tablename) {
-
     if (tablename == null)
       return;
 
@@ -83,22 +82,34 @@ export class AppComponent implements OnInit {
     };
 
     this.codeGeneratorService.postSearchColumns(request).subscribe(response => {
-      this.columns = response;
+      var columnsTemp = [];
+      response.forEach(col => {
+        columnsTemp.push({
+          "id": col.id,
+          "name": col.nameEntity,
+          "dataType": col.dataType,
+          "nameDb": col.name,
+          "dataTypeDb": col.dataTypeEntity,
+          "length": col.length,
+          "precision": col.precision,
+          "dataTypeLength": col.dataTypeLength,
+          "isNull": col.isNull
+        });
+      });
+
+      this.columns = columnsTemp
     });
   }
 
   generate() {
-    console.log(this.searchFormGroup);
     var generate = {
-      "project": "Advance",
+      "project": this.searchFormGroup.value.project,
       "dbType": this.tempData.dbType,
       "programmingLanguage": this.tempData.languageProgramming,
       "table": this.tempTable,
       "entity": this.searchFormGroup.value.entity,
       "fields": this.columns
     };
-
-    console.log(generate)
 
     this.codeGeneratorService.postGenerator(generate).subscribe(response => {
       this.downloadFile(response);
@@ -112,10 +123,7 @@ export class AppComponent implements OnInit {
   }
 
   setColumnValue(id, value) {
-    console.log("aqui");
     var result = this.columns.find(x => x.id == id);
     result.isNull = value;
   }
-
-
 }
