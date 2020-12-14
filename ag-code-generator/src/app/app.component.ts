@@ -38,8 +38,8 @@ export class AppComponent implements OnInit {
   loadForm() {
     this.searchFormGroup = this.formBuilder.group({
       tablename: [null],
-      entity: [null],
-      project: [null]
+      entity: [""],
+      project: [""]
     });
   }
 
@@ -102,6 +102,12 @@ export class AppComponent implements OnInit {
   }
 
   generate() {
+    var entity = this.searchFormGroup.value.entity;
+    var project = this.searchFormGroup.value.project;
+    if(entity.length == 0 || project.length == 0){
+      alert("Porfavor ingresar Entidad y Proyecto");
+      return;
+    }
     var generate = {
       "project": this.searchFormGroup.value.project,
       "dbType": this.tempData.dbType,
@@ -111,15 +117,18 @@ export class AppComponent implements OnInit {
       "fields": this.columns
     };
 
-    this.codeGeneratorService.postGenerator(generate).subscribe(response => {
+    this.codeGeneratorService.postDownloadGenerator(generate).subscribe(response => {
       this.downloadFile(response);
     });
   }
 
   downloadFile(data: any) {
-    const blob = new Blob([data], { type: 'text/plain' });
+    const blob = new Blob([data], { type: 'application/zip' });
     const url = window.URL.createObjectURL(blob);
-    window.open(url);
+    var fileLink = document.createElement('a');
+    fileLink.href = url;
+    fileLink.download = this.searchFormGroup.value.entity + ".zip";
+    fileLink.click();
   }
 
   setColumnValue(id, value) {
