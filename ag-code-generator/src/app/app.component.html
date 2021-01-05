@@ -20,22 +20,23 @@
         <div nz-row>
             <div nz-col [nzSm]="5" [nzXs]="24">
                 <nz-form-item>
-                    <nz-form-label nzFor="table">Entidad</nz-form-label>
-                    <nz-form-control>
-                        <input type="text" nz-input formControlName="entity" placeholder="Ingresar Entidad"/>
-                    </nz-form-control>
-                </nz-form-item>
-                <nz-form-item>
                     <nz-form-label nzFor="table">Proyecto</nz-form-label>
                     <nz-form-control>
                         <input type="text" nz-input formControlName="project" placeholder="Ingresar Proyecto"/>
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            
         </div>
         <div nz-row>
-            <div nz-col>
+            <div nz-col [nzSm]="5" [nzXs]="24" style="margin-right: 5px;">
+                <nz-form-item>
+                    <nz-form-label nzFor="table">Entidad</nz-form-label>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="entity" placeholder="Ingresar Entidad"/>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSm]="5" [nzXs]="24">
                 <nz-form-control>
                     <button nz-button nzType="primary" (click)="generate()">Generar</button>
                 </nz-form-control>

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    codeGenerator: "http://localhost:8089"
+    codeGenerator: "http://carbono:8080/mscodegenerator"
   },
   codeGenerator: {
     tableSearch: "/tables/search",
