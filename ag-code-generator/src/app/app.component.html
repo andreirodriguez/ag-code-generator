@@ -1,4 +1,77 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a>
+<form nz-form [formGroup]="searchFormGroup">
+    <nz-card nzTitle="Generador de código">
+        <div nz-row>
+            <div nz-col [nzSm]="5" [nzXs]="24">
+                <nz-form-item style="margin-right: 5PX;">
+                    <nz-form-label nzFor="table">Tabla</nz-form-label>
+                    <nz-form-control>
+                        <nz-select formControlName="tablename" nzShowSearch nzAllowClear nzPlaceHolder="Seleccione una tabla" [(ngModel)]="tableSelected" (ngModelChange)="searchColumns($event)">
+                            <nz-option *ngFor="let item of tableList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSm]="17" [nzXs]="24">
+                <nz-form-control>
+                    <button nz-button nzType="primary" (click)="openModal()">Conexión</button>
+                </nz-form-control>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col [nzSm]="5" [nzXs]="24">
+                <nz-form-item>
+                    <nz-form-label nzFor="table">Proyecto</nz-form-label>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="project" placeholder="Ingresar Proyecto"/>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col [nzSm]="5" [nzXs]="24" style="margin-right: 5px;">
+                <nz-form-item>
+                    <nz-form-label nzFor="table">Entidad</nz-form-label>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="entity" placeholder="Ingresar Entidad"/>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col [nzSm]="5" [nzXs]="24">
+                <nz-form-control>
+                    <button nz-button nzType="primary" (click)="generate()">Generar</button>
+                </nz-form-control>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-table [nzData]="columns" nzShowPagination="false">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Campo Entidad</th>
+                            <th>Tipo Dato Entidad</th>
+                            <th>Campo BD</th>
+                            <th>Tipo Dato BD</th>
+                            <th>Es Null BD</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let column of columns">
+                                <td>{{column.id}}</td>
+                                <td>
+                                    <input type="text" nz-input [(ngModel)]="column.name" [ngModelOptions]="{standalone: true}" />
+                                </td>
+                                <td>
+                                    <input type="text" nz-input [(ngModel)]="column.dataTypeDb" [ngModelOptions]="{standalone: true}" />
+                                </td>
+                                <td>{{column.nameDb}}</td>
+                                <td>{{column.dataTypeLength}}</td>
+                                <td [nzChecked]="column.isNull" (nzCheckedChange)="setColumnValue(column.id, $event)" nzDisabled="true">
+                                </td>
+                            </tr>
+                        </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </nz-card>
+</form>
+<app-modal [isVisible]="isVisible" (valuesEmit)="emiteConection($event)"></app-modal>
